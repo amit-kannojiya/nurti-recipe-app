@@ -1,0 +1,47 @@
+.header {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 4.5rem;
+}
+
+.layer {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.logo-wrapper {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+
+
+    .logo {
+        border: 5px solid #fff;
+        padding: 15x;
+        cursor: pointer;
+        border-radius: 50%;
+
+        .brand {
+            font-size: 40px;
+            color: #fff;
+            padding: 7px;
+        }
+    }
+
+}
+
+.header__text {
+    padding: 100px;
+    text-align: center;
+
+    h1 {
+        color: #fff;
+        margin-bottom: 1rem;
+        font-size: 3rem
+    }
+
+    p {
+        font-size: 1.5rem;
+        color: #fff
+    }
+}
