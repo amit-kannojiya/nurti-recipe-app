@@ -17,8 +17,8 @@ function Header() {
             </div>
           </nav>
           <div className="header__text">
-            <h1>Recipe App Reactjs</h1>
-            <p>Let's have fun building this app together...</p>
+            <h1>Recipe App </h1>
+            <p>Lets explore some exciting one... </p>
           </div>
         </div>
       </div>
