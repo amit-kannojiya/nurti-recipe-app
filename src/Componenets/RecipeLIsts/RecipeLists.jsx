@@ -9,60 +9,46 @@ function RecipeLists() {
   const [query, setQuery] = useState("pizza");
   const [data, setData] = useState("");
 
-  useEffect(() => {
-    fetchData(query).then((response) => {
-      setData(response);
-      console.log(response);
-    });
-  }, []);
+  //   const initData = async () => {
+  //     const data = await fetchData("apple");
+  //     console.log(data);
+  //     setData(data);
+  //   };
+
+  //   useEffect(initData, []);
+
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    const query = event.target.searchQuery.value;
+    const data = await fetchData(query);
+    console.log(data);
+    setData(data);
+  };
   return (
     <div className="container">
       <div className="heading-line">
         <strong>Search Recipes</strong>
         <div className="input-wrapper">
-          <input type="text" placeholder="Search" />
-          <button>
-            <BsSearch />
-          </button>
+          <form onSubmit={(event) => handleSearch(event)}>
+            <input type="text" placeholder="Search" name="searchQuery" />
+            <button type="submit">
+              <BsSearch />
+            </button>
+          </form>
         </div>
       </div>
       <div className="flexbox">
-        <div className="flexItem">
-          <div className="img-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1378&q=80"
-              alt="item.recipe.label"
-            />
-          </div>
-          <p>Pizza Recipe</p>
-        </div>
-        <div className="flexItem">
-          <div className="img-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1378&q=80"
-              alt="item.recipe.label"
-            />
-          </div>
-          <p>Pizza Recipe</p>
-        </div>
-        <div className="flexItem">
-          <div className="img-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1378&q=80"
-              alt="item.recipe.label"
-            />
-          </div>
-          <p>Pizza Recipe</p>
-        </div>
-        <div className="flexItem">
-          <div className="img-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1378&q=80"
-              alt="item.recipe.label"
-            />
-          </div>
-          <p>Pizza Recipe</p>
-        </div>
+        {data &&
+          data.hits.map((item, index) => {
+            return (
+              <div key={index} className="flexItem">
+                <div className="img-wrapper">
+                  <img src={item.recipe.image} alt={item.recipe.label} />
+                </div>
+                <p>{item.recipe.label}</p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

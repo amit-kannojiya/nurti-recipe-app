@@ -1,29 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CiPizza } from "react-icons/ci";
 import { GiFruitBowl, GiNoodles, GiCheckMark } from "react-icons/gi";
 import { MdOutlineIcecream } from "react-icons/md";
 import "./Tabs.scss";
 function Tabs() {
+  const [active, setActive] = useState("pizza");
+  const [tabLabel, setTabLabel] = useState([
+    {
+      name: "pizza",
+      icon: <CiPizza />,
+      id: "b2ebad01df2a319d259c2d3f61eb40c5",
+    },
+    {
+      name: "Noodles",
+      icon: <GiNoodles />,
+      id: "b2ebad01df2a319d259c2d3f61eb40c5",
+    },
+    {
+      name: "Desert",
+      icon: <GiFruitBowl />,
+      id: "b2ebad01df2a319d259c2d3f61eb40c5",
+    },
+    {
+      name: "ice cream",
+      icon: <MdOutlineIcecream />,
+      id: "b2ebad01df2a319d259c2d3f61eb40c5",
+    },
+  ]);
+  const handleClick = (name, id) => {
+    setActive(name);
+  };
+
   return (
     <div className="container">
       <h1 className="recipeHeading">What would you like to have!</h1>
       <div className="tabs">
-        <div className="tablist active">
-          <CiPizza />
-          <span>Pizza</span>
-        </div>
-        <div className="tablist">
-          <GiNoodles />
-          <span>Noodles</span>
-        </div>
-        <div className="tablist">
-          <GiFruitBowl />
-          <span>Desert</span>
-        </div>
-        <div className="tablist">
-          <MdOutlineIcecream />
-          <span>ice cream</span>
-        </div>
+        {tabLabel.map((item, index) => {
+          <div
+            onClick={() => handleClick(item.name, item.id)}
+            key={index}
+            className={`tablist ${active === item.name ? "active" : ""}`}
+          >
+            {item.icon}
+            <span>{item.name}</span>
+          </div>;
+        })}
       </div>
       <div className="recipe_banner">
         <div className="left-col">
