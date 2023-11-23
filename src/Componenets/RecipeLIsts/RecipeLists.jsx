@@ -3,26 +3,41 @@ import { BsSearch } from "react-icons/bs";
 import "./RecipeLists.scss";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../service";
+import { CiPizza } from "react-icons/ci";
 
-function RecipeLists() {
+function RecipeLists(props) {
   const [searchedTerm, setSearchTerm] = useState("");
   const [query, setQuery] = useState("pizza");
-  const [data, setData] = useState("");
+  const [recipes, setRecipes] = useState("");
 
-  //   const initData = async () => {
-  //     const data = await fetchData("apple");
-  //     console.log(data);
-  //     setData(data);
-  //   };
+  //   useState does something like this
+  //   const recipes = []
+  //   function setRecipes(someData){
+  //     recipes = someData;
+  //   }
 
   //   useEffect(initData, []);
+  useEffect(() => {
+    const initData = async () => {
+      const data = await fetchData("pizza");
+      setRecipes(data);
+      props.changeSelectedRecipe(data.hits[0]);
+    };
+
+    initData();
+  }, []);
 
   const handleSearch = async (event) => {
     event.preventDefault();
     const query = event.target.searchQuery.value;
     const data = await fetchData(query);
     console.log(data);
-    setData(data);
+    setRecipes(data);
+    props.changeSelectedRecipe(data.hits[0]);
+  };
+  const displayValue = (recipe) => {
+    // console.log(recipe);
+    props.changeSelectedRecipe(recipe);
   };
   return (
     <div className="container">
@@ -38,10 +53,14 @@ function RecipeLists() {
         </div>
       </div>
       <div className="flexbox">
-        {data &&
-          data.hits.map((item, index) => {
+        {recipes &&
+          recipes.hits.map((item, index) => {
             return (
-              <div key={index} className="flexItem">
+              <div
+                onClick={() => displayValue(item)}
+                key={index}
+                className="flexItem"
+              >
                 <div className="img-wrapper">
                   <img src={item.recipe.image} alt={item.recipe.label} />
                 </div>
