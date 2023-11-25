@@ -10,13 +10,6 @@ function RecipeLists(props) {
   const [query, setQuery] = useState("pizza");
   const [recipes, setRecipes] = useState("");
 
-  //   useState does something like this
-  //   const recipes = []
-  //   function setRecipes(someData){
-  //     recipes = someData;
-  //   }
-
-  //   useEffect(initData, []);
   useEffect(() => {
     const initData = async () => {
       const data = await fetchData("pizza");
@@ -31,12 +24,11 @@ function RecipeLists(props) {
     event.preventDefault();
     const query = event.target.searchQuery.value;
     const data = await fetchData(query);
-    console.log(data);
+
     setRecipes(data);
     props.changeSelectedRecipe(data.hits[0]);
   };
   const displayValue = (recipe) => {
-    // console.log(recipe);
     props.changeSelectedRecipe(recipe);
   };
   return (

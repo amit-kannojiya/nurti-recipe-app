@@ -1,3 +1,5 @@
+@use "../../styles/partials/mixins" as *;
+
 .header {
     background-repeat: no-repeat;
     background-position: center;
@@ -22,7 +24,7 @@
         border-radius: 50%;
 
         .brand {
-            font-size: 40px;
+            font-size: 35px;
             color: #fff;
             padding: 7px;
         }
@@ -31,17 +33,26 @@
 }
 
 .header__text {
-    padding: 100px;
+    padding: 20px;
     text-align: center;
 
     h1 {
         color: #fff;
         margin-bottom: 1rem;
-        font-size: 3rem
+
+        font-size: 2rem;
+
+        @include tablet {
+            font-size: 3rem;
+        }
     }
 
     p {
-        font-size: 1.5rem;
-        color: #fff
+        font-size: 1rem;
+        color: #fff;
+
+        @include tablet {
+            font-size: 1.6rem;
+        }
     }
 }

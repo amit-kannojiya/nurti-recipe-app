@@ -3,9 +3,8 @@ import React from "react";
 import { GiCheckMark } from "react-icons/gi";
 
 function RecipeView(props) {
-  console.log(props.recipe);
   const recipe = props.recipe.recipe;
-
+  console.log(recipe);
   return (
     <div className="recipe_banner">
       <div className="left-col">
@@ -13,16 +12,18 @@ function RecipeView(props) {
         <h1>{recipe.label}</h1>
         <p>
           <strong>Calories:</strong>
-          <small>{recipe.calories}</small>
+
+          <small>{recipe.calories.toFixed(0)}</small>
         </p>
-        <h3>Ingredients</h3>
+        <h3>Ingredients:</h3>
         <div className="ingredients">
           <ul>
             {recipe.ingredients.map((ingredient) => {
               return (
-                <li>
+                <li key={ingredient.weight}>
                   <GiCheckMark />
-                  &nbsp;<span>{ingredient.food}</span>
+                  &nbsp;
+                  <span>{ingredient.food}</span>
                 </li>
               );
             })}
